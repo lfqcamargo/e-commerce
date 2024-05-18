@@ -2,4 +2,4 @@ run:
 	@uvicorn api.main:app --reload
 
 test:
-	@PYTHONPATH=./ pytest
+	@pytest --asyncio-mode=auto

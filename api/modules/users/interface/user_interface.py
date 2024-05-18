@@ -1,3 +1,4 @@
+import uuid
 from typing import Annotated
 from typing import Optional
 from pydantic import BaseModel, Field, EmailStr
@@ -13,7 +14,7 @@ class UserRequest(BaseModel):
         from_attributes = True
     
 class UserResponse(BaseModel):
-    id: Annotated[int, Field()]
+    id: Annotated[uuid.UUID, Field()]
     email: Annotated[EmailStr, Field()]
     name: Annotated[str, Field()]
     cpf: Annotated[str, Field()] 

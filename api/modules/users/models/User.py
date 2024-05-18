@@ -15,7 +15,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(100), nullable=False, index=True, name="users_nam")
     password: Mapped[str] = mapped_column(String(255), nullable=False, name="users_has_password")
     active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True, name="users_ind_active")
-    dateCreated: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=func.now(), name="users_dat_created")
-    dateLogin: Mapped[datetime] = mapped_column(DateTime, nullable=True, name="users_dat_login")
+    dateCreated: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=func.now(), name="users_dat_created")
+    dateLogin: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True, name="users_dat_login")
     
         
