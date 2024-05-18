@@ -3,7 +3,7 @@ import os
 import asyncio
 from pathlib import Path
 import pytest
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from api.main import app
@@ -28,7 +28,7 @@ async def override_get_db():
 
 app.dependency_overrides[get_db] = override_get_db
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope='function')
 async def client() -> AsyncGenerator[AsyncClient, None]:
     async def init_db():
         async with engine.begin() as conn:
@@ -36,7 +36,7 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
             await conn.run_sync(Base.metadata.create_all)
     await init_db()
 
-    async with AsyncClient(app=app, base_url="http://test") as c:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as c:
         yield c
 
     async def drop_db():
@@ -44,7 +44,7 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
             await conn.run_sync(Base.metadata.drop_all)
     await drop_db()
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope='function')
 async def db_session():
     async with TestingSessionLocal() as session:
         async with session.begin():
@@ -53,6 +53,6 @@ async def db_session():
 
 @pytest.fixture(scope="session")
 def event_loop():
-    loop = asyncio.new_event_loop()
+    loop = asyncio.get_event_loop_policy().new_event_loop()
     yield loop
     loop.close()
