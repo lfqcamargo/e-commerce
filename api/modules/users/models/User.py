@@ -1,9 +1,8 @@
 import uuid
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String, Boolean, DateTime, func
 from datetime import datetime
-
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, Boolean, DateTime, func
 from api.shared.database.connection import Base
 
 class User(Base):
@@ -17,5 +16,4 @@ class User(Base):
     active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True, name="users_ind_active")
     dateCreated: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=func.now(), name="users_dat_created")
     dateLogin: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True, name="users_dat_login")
-    
-        
+

@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends, Query, status
 from typing import List, Optional
+
 from api.modules.users.controller.user_controller import UserController
 from api.modules.users.interface.user_interface import UserRequest, UserResponse
+from api.shared.database.dependencies import get_current_user
 
 router = APIRouter()
 
@@ -91,3 +93,16 @@ async def find_all_users(skip: int = Query(0, description="Number of records to 
     users = await user_controller.get_all_users(skip=skip, limit=limit, active=active)     
     
     return [UserResponse.model_validate(user.__dict__) for user in users]
+
+@router.get("/test-auth", summary="Test Authentication", tags=["auth"])
+async def test_authentication(current_user: dict = Depends(get_current_user)):
+    """
+    Test route to verify JWT authentication.
+
+    Args:
+        current_user (dict): The current authenticated user based on the JWT token.
+
+    Returns:
+        dict: A message confirming authentication and user information.
+    """
+    return {"message": "User authenticated", "user": current_user}

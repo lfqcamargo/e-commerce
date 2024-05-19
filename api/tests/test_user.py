@@ -42,6 +42,57 @@ async def test_find_user_by_email_not_found(client: AsyncClient) -> None:
     assert response.json() == {"detail": "User not found"}
 
 @pytest.mark.asyncio
+async def test_find_all_users_pagination(client: AsyncClient) -> None:
+    """
+    Test the retrieval of all users with pagination.
+
+    This test checks that the endpoint returns a 200 status code
+    and the correct list of users on pagination.
+    """
+    user1 = {
+        "email": "user1@example.com",
+        "cpf": "12345678911",
+        "password": "securepassword",
+        "name": "UserExample1",
+        "active": True
+    }
+    
+    user2 = {
+        "email": "user2@example.com",
+        "cpf": "12345678912",
+        "password": "securepassword",
+        "name": "UserExample2",
+        "active": True
+    }
+    
+    user3 = {
+        "email": "user3@example.com",
+        "cpf": "12345678913",
+        "password": "securepassword",
+        "name": "UserExample3",
+        "active": True
+    }
+    
+    response1 = await client.post("/users/", json=user1)
+    assert response1.status_code == status.HTTP_201_CREATED
+    response2 = await client.post("/users/", json=user2)
+    assert response2.status_code == status.HTTP_201_CREATED
+    response3 = await client.post("/users/", json=user3)
+    assert response3.status_code == status.HTTP_201_CREATED
+    
+    response = await client.get("/users/?skip=0&limit=2")
+    assert response.status_code == status.HTTP_200_OK
+
+    body = response.json()
+    assert isinstance(body, list)
+    assert len(body) == 2
+
+    emails = [user["email"] for user in body]
+    assert user1["email"] in emails
+    assert user2["email"] in emails
+
+
+@pytest.mark.asyncio
 async def test_find_user_by_id(client: AsyncClient) -> None:
     """
     Test the retrieval of user by id.
@@ -98,56 +149,6 @@ async def test_find_user_by_email(client: AsyncClient) -> None:
     body = response.json()
     assert body["email"] == user["email"]
     assert body["name"]  == user["name"]
-
-@pytest.mark.asyncio
-async def test_find_all_users_pagination(client: AsyncClient) -> None:
-    """
-    Test the retrieval of all users with pagination.
-
-    This test checks that the endpoint returns a 200 status code
-    and the correct list of users on pagination.
-    """
-    user1 = {
-        "email": "user1@example.com",
-        "cpf": "12345678911",
-        "password": "securepassword",
-        "name": "UserExample1",
-        "active": True
-    }
-    
-    user2 = {
-        "email": "user2@example.com",
-        "cpf": "12345678912",
-        "password": "securepassword",
-        "name": "UserExample2",
-        "active": True
-    }
-    
-    user3 = {
-        "email": "user3@example.com",
-        "cpf": "12345678913",
-        "password": "securepassword",
-        "name": "UserExample3",
-        "active": True
-    }
-    
-    response1 = await client.post("/users/", json=user1)
-    assert response1.status_code == status.HTTP_201_CREATED
-    response2 = await client.post("/users/", json=user2)
-    assert response2.status_code == status.HTTP_201_CREATED
-    response3 = await client.post("/users/", json=user3)
-    assert response3.status_code == status.HTTP_201_CREATED
-    
-    response = await client.get("/users/?skip=0&limit=2")
-    assert response.status_code == status.HTTP_200_OK
-
-    body = response.json()
-    assert isinstance(body, list)
-    assert len(body) == 2
-
-    emails = [user["email"] for user in body]
-    assert user1["email"] in emails
-    assert user2["email"] in emails
 
 @pytest.mark.asyncio
 async def test_find_all_users(client: AsyncClient) -> None:

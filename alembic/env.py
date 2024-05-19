@@ -28,7 +28,8 @@ fileConfig(config.config_file_name)
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from api.shared.database.connection import Base  # Import your Base
-from api.modules.users.models.User import User  # Import your models to ensure they are registered
+from api.modules.users.models.User import User
+from api.modules.users.models.Address import Address
 
 target_metadata = Base.metadata
 
