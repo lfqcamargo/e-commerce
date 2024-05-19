@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Query, status, HTTPException
+from fastapi import APIRouter, Depends, Query, status
 from typing import List, Optional
 from api.modules.users.controller.user_controller import UserController
 from api.modules.users.interface.user_interface import UserRequest, UserResponse
@@ -7,12 +7,12 @@ router = APIRouter()
 
 @router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED, summary="Create a new user", tags=["users"])
 async def create_user(user: UserRequest, user_controller: UserController = Depends()
-                ) -> UserResponse:
+                    ) -> UserResponse:
     """ Create a new user.
 
     Args:
         user (UserRequest): The user data to create.
-        db (Session, optional): The database session. Defaults to Depends(get_db).
+        user_controller (UserController, optional): The user controller. Defaults to Depends().
 
     Returns:
         UserResponse: The created user.
@@ -25,12 +25,52 @@ async def create_user(user: UserRequest, user_controller: UserController = Depen
     
     return UserResponse.model_validate(new_user.__dict__)
 
+@router.get("/email/{user_email}", response_model=UserResponse, status_code=status.HTTP_200_OK, summary="Get a user by id", tags=["users"])
+async def find_user_by_email(user_email: str, 
+                          user_controller: UserController = Depends()
+                        ) -> UserResponse:
+    """
+    Retrieve a user by email.
+
+    Args:
+        user_email (str): The email of the user to retrieve.
+        user_controller (UserController, optional): The user controller. Defaults to Depends().
+
+    Returns:
+        UserResponse: The retrieved user.
+
+    Raises:
+        HTTPException: If the user is not found.
+    """
+    user = await user_controller.get_user_by_email(user_email)
+    
+    return UserResponse.model_validate(user.__dict__)
+
+@router.get("/{user_id}", response_model=UserResponse, status_code=status.HTTP_200_OK, summary="Get a user by id", tags=["users"])
+async def find_user_by_id(user_id: str, user_controller: UserController = Depends()) -> UserResponse:
+    """
+    Retrieve a user by ID.
+
+    Args:
+        user_id (str): The ID of the user to retrieve.
+        user_controller (UserController, optional): The user controller. Defaults to Depends().
+
+    Returns:
+        UserResponse: The retrieved user.
+
+    Raises:
+        HTTPException: If the user is not found.
+    """
+    user = await user_controller.get_user_by_id(user_id)
+    
+    return UserResponse.model_validate(user.__dict__)
+
 @router.get("/", response_model=List[UserResponse], status_code=status.HTTP_200_OK, summary="Get a list of users", tags=["users"])
-async def find_all_users(user_controller: UserController = Depends(),
-                         skip: int = Query(0, description="Number of records to skip for pagination"),
+async def find_all_users(skip: int = Query(0, description="Number of records to skip for pagination"),
                          limit: int = Query(10, description="Maximum number of records to return"),
                          active: Optional[bool] = Query(None, description="Filter only active users"),
-                    ) -> List[UserResponse]:
+                         user_controller: UserController = Depends()
+                        ) -> List[UserResponse]:
     
     """Retrieve a list of users with pagination.
 
@@ -39,7 +79,7 @@ async def find_all_users(user_controller: UserController = Depends(),
         skip (int, optional): Number of records to skip for pagination.
         limit (int, optional): Maximum number of records to return.
         active (Optional[bool], optional): Filter by active users.
-        db (Session, optional): The database session.
+        user_controller (UserController, optional): The user controller. Defaults to Depends().
 
     Returns:
         List[UserResponse]: The list of users.

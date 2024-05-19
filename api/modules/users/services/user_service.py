@@ -52,11 +52,11 @@ class UserService:
         
         return UserResponse.model_validate(new_user.__dict__) 
             
-
-    async def find_all_users(self, skip: int = 0, limit: int = 10, active: Optional[bool] = None) -> List[UserResponse]:
+    async def get_all_users(self, skip: int = 0, limit: int = 10, active: Optional[bool] = None) -> List[UserResponse]:
         query = select(User)
+        print(active)
         if active is not None:
-            query = query.where(User.active == active)
+            query = query.where(User.active.is_(active))
         
         query = query.offset(skip).limit(limit)
         
@@ -68,6 +68,27 @@ class UserService:
                 raise UserNotFoundException()
             
             return  [UserResponse.model_validate(user.__dict__) for user in users]
+        
+    async def get_user_by_id(self, user_id: str) -> UserResponse:
+        """
+        Retrieves a user by their ID.
+
+        Args:
+            ID (str): The ID of the user.
+
+        Returns:
+            User: The user with the given ID.
+
+        Raises:
+            UserNotFoundException: If no user is found with the given ID.
+        """
+        stmt = select(User).filter(User.id == user_id)
+        result = await self.session.execute(stmt)
+        user = result.scalars().first()
+        if not user:
+            raise UserNotFoundException()
+        
+        return UserResponse.model_validate(user.__dict__)
         
     async def get_user_by_cpf(self, cpf: str) -> UserResponse:
         """
@@ -88,7 +109,7 @@ class UserService:
         if not user:
             raise UserNotFoundException()
         
-        return UserResponse.model_validate(user)
+        return UserResponse.model_validate(user.__dict__)
         
     async def get_user_by_email(self, email: str) -> UserResponse:
         """
@@ -109,4 +130,4 @@ class UserService:
         if not user:
             raise UserNotFoundException()
         
-        return UserResponse.model_validate(user)
+        return UserResponse.model_validate(user.__dict__)

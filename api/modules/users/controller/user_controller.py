@@ -4,9 +4,8 @@ from typing import List, Optional
 
 from api.modules.users.services.user_service import UserService
 from api.shared.database.dependencies import get_db
-from api.modules.users.models.User import User
 from api.modules.users.interface.user_interface import UserResponse
-from api.shared.exceptions.user_exceptions import UserNotFoundException
+
 
 class UserController:
     def __init__(self, session: AsyncSession = Depends(get_db)):
@@ -16,9 +15,19 @@ class UserController:
         new_user = await self.user_service.create_user(user_data)
         
         return new_user
+    
+    async def get_user_by_id(self, user_id: str):
+        user = await self.user_service.get_user_by_id(user_id)
+        
+        return user
+    
+    async def get_user_by_email(self, user_email: str):
+        user = await self.user_service.get_user_by_email(user_email)
+        
+        return user
         
     async def get_all_users(self, skip: int = 0, limit: int = 10, active: Optional[bool] = None) -> List[UserResponse]:
-        users = await self.user_service.find_all_users(skip=skip, limit=limit, active=active)
+        users = await self.user_service.get_all_users(skip=skip, limit=limit, active=active)
 
         return users
     

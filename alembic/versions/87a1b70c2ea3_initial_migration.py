@@ -1,8 +1,8 @@
-"""create users table
+"""Initial migration
 
-Revision ID: 3c04c718f509
+Revision ID: 87a1b70c2ea3
 Revises: 
-Create Date: 2024-05-18 11:15:07.918313
+Create Date: 2024-05-19 10:25:20.222547
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '3c04c718f509'
+revision: str = '87a1b70c2ea3'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -27,8 +27,8 @@ def upgrade() -> None:
     sa.Column('users_nam', sa.String(length=100), nullable=False),
     sa.Column('users_has_password', sa.String(length=255), nullable=False),
     sa.Column('users_ind_active', sa.Boolean(), nullable=False),
-    sa.Column('users_dat_created', sa.DateTime(), nullable=False),
-    sa.Column('users_dat_login', sa.DateTime(), nullable=True),
+    sa.Column('users_dat_created', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('users_dat_login', sa.DateTime(timezone=True), nullable=True),
     sa.PrimaryKeyConstraint('users_id')
     )
     op.create_index(op.f('ix_users_users_cod_cpf'), 'users', ['users_cod_cpf'], unique=True)
