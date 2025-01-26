@@ -115,7 +115,7 @@ export const ContainerCategory = styled.div`
     line-height: 18px;
 
     color: ${(props) => props.theme.white};
-    padding: 0px 24px 0px 24px;
+    padding: 0px 20px 0px 20px;
     font-weight: bold;
     transition: background-color 300ms 50ms;
 

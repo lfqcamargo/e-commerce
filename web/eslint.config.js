@@ -29,6 +29,7 @@ export default tseslint.config(
       'no-trailing-spaces': ['error'], // Evita espaços em branco no final das linhas
       'quotes': ['error', 'single', { 'allowTemplateLiterals': true }], // Força aspas simples nas importações
       'comma-dangle': ['error', 'always-multiline'], // Exige vírgula no final em listas e objetos com múltiplas linhas
+      'max-len': ['error', { code: 100, tabWidth: 2, ignoreUrls: true }], // Limita a linha a 100 caracteres
     },
   },
 )

@@ -1,6 +1,15 @@
 import { Outlet } from 'react-router-dom'
 import { MdOutlineMenu } from 'react-icons/md'
-import { ContainerCategory, ContainerContent, ContainerIcons, ContainerLogin, ContainerOptions, ContainerPrimary, ContainerSearch, Logo } from './styles'
+import {
+  ContainerCategory,
+  ContainerContent,
+  ContainerIcons,
+  ContainerLogin,
+  ContainerOptions,
+  ContainerPrimary,
+  ContainerSearch,
+  Logo,
+} from './styles'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { RxAccessibility } from 'react-icons/rx'
 import { MdSupportAgent } from 'react-icons/md'
@@ -14,7 +23,7 @@ export function CommerceLayout() {
         <ContainerPrimary>
           <ContainerContent>
             <ContainerOptions>
-              <MdOutlineMenu size={30} color='white'/>
+              <MdOutlineMenu size={30} color='white' />
               <Logo src="logo.png" alt="Logo" />
               <ContainerSearch>
                 <input type="text" placeholder='Digite para pesquisar' />
@@ -22,7 +31,7 @@ export function CommerceLayout() {
               </ContainerSearch>
               <ContainerLogin>
                 <FaRegUserCircle size={36} color='white' />
-                <p><strong>ENTRE</strong> ou <br/><strong>CADASTRE-SE</strong></p>
+                <p><strong>ENTRE</strong> ou <br /><strong>CADASTRE-SE</strong></p>
               </ContainerLogin>
 
             </ContainerOptions>
@@ -55,10 +64,7 @@ export function CommerceLayout() {
           </div>
         </ContainerCategory>
       </header>
-
-      <div>
-        <Outlet />
-      </div>
+      <Outlet />
 
 
     </div>
