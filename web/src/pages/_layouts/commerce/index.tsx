@@ -15,15 +15,25 @@ import { RxAccessibility } from 'react-icons/rx'
 import { MdSupportAgent } from 'react-icons/md'
 import { MdFavorite } from 'react-icons/md'
 import { FaCartShopping } from 'react-icons/fa6'
+import { useState } from 'react'
+import { SideMenu } from '../../../components/SideMenu'
+
 
 export function CommerceLayout() {
+  const [isMenuOpen, setMenuOpen] = useState(false)
+
+  const handleMenuToggle = () => setMenuOpen((prev) => !prev)
+  const handleMenuClose = () => setMenuOpen(false)
+
   return (
     <div>
       <header>
         <ContainerPrimary>
           <ContainerContent>
             <ContainerOptions>
-              <MdOutlineMenu size={30} color='white' />
+              <button onClick={handleMenuToggle}>
+                <MdOutlineMenu size={30} color="white" />
+              </button>
               <Logo src="logo.png" alt="Logo" />
               <ContainerSearch>
                 <input type="text" placeholder='Digite para pesquisar' />
@@ -64,6 +74,8 @@ export function CommerceLayout() {
           </div>
         </ContainerCategory>
       </header>
+
+      <SideMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
       <Outlet />
 
 

@@ -29,6 +29,11 @@ export const ContainerOptions = styled.div`
   align-items: center;
 
   gap: 32px;
+
+  button {
+    all: unset;
+    cursor: pointer;
+  }
 `
 
 export const Logo = styled.img`
