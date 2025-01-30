@@ -1,7 +1,12 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 interface SideMenuProps {
   isOpen: boolean;
+}
+
+interface LinkFooterProps {
+  bgColor: boolean;
 }
 
 export const Overlay = styled.div<SideMenuProps>`
@@ -73,13 +78,20 @@ export const ContainerNav = styled.nav`
     flex-direction: column;
   }
 
+  hr {
+    margin: auto;
+    width: 80%;
+    border: 1px solid ${(props) => props.theme['gray-100']};
+  }
+
   ul {
     display: flex;
     flex-direction: column;
+    padding: 20px 0px;
   }
 
   li {
-    height: 40px;
+    height: 50px;
 
     margin-left: 16px;
     list-style: none;
@@ -97,4 +109,34 @@ export const ContainerNav = styled.nav`
     color: ${(props) => props.theme.white};
     text-decoration: none;
   }
+`
+
+export const ContainerFooter = styled.div`
+  display: flex;
+  height: 160px;
+  width: 100%;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+export const LinkFooter = styled(Link)<LinkFooterProps>`
+  display: flex;
+  height: 48px;
+  width: 280px;
+
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+
+  color: ${(props) => props.theme.white};
+  text-decoration: none;
+  background-color: ${(props) => props.bgColor
+    ? props.theme['secondary-500']
+    : props.theme['primary-500']};
+
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
 `
