@@ -12,6 +12,13 @@ export const ContainerMain = styled.div`
   margin: auto;
 
   background-color: ${(props) => props.theme['white-bg']};
+
+  h3 {
+    padding-left: 42px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 14px;
+  }
 `
 
 export const ContainerBanner = styled.div`
@@ -34,9 +41,9 @@ export const ContainersectionProducts = styled.section`
   display: flex;
   width: 100%;
   height: 568px;
-
   flex-direction: column;
   align-items: center;
+
 `
 
 export const ContainerCarousel = styled.div`
@@ -87,6 +94,7 @@ export const ArrowButton = styled.button`
 export const ContainerViewAll = styled.div`
   display: flex;
   width: 1408px;
+  margin: auto;
 
   align-items: center;
   justify-content: end; 
@@ -99,4 +107,31 @@ export const ContainerViewAll = styled.div`
     font-size: 14px;
     line-height: 24px;
   }
+`
+
+export const ContainerCategory = styled.div`
+  display: flex;
+  width: 1520px;
+
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: -24px;
+
+  div {
+    display: flex;
+    align-items: center;
+
+    color: ${(props) => props.theme['secondary-500']};
+  }
+`
+export const ContainerAdvertising = styled.div`
+  display: flex;
+  width: 100%;
+  
+  padding: 24px;
+  justify-content: space-around;
 `

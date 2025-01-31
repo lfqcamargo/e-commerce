@@ -26,7 +26,7 @@ export function CommerceLayout() {
   const handleMenuClose = () => setMenuOpen(false)
 
   return (
-    <div>
+    <>
       <header>
         <ContainerPrimary>
           <ContainerContent>
@@ -79,6 +79,6 @@ export function CommerceLayout() {
       <Outlet />
 
 
-    </div>
+    </>
   )
 }

@@ -59,14 +59,14 @@ export function CardProduct({
         <img src={img} alt={title} />
         <ContainerDescription>
           <Title>{title}</Title>
-          <span>R$ {price}</span>
+          <span>R$ {price.toFixed(2)}</span>
           <ContainerPricePix>
-            <PricePix>R$ {offerPrice - (offerPrice * discountPix / 100)}</PricePix>
+            <PricePix>R$ {(offerPrice - (offerPrice * discountPix / 100)).toFixed(2)}</PricePix>
             <DiscountPix>- {discountPix}%</DiscountPix>
           </ContainerPricePix>
 
           <span>Á vista no PIX<br/></span>
-          <span>ou até <strong>10x de R$ {offerPrice / 10}</strong></span>
+          <span>ou até <strong>10x de R$ {(offerPrice / 10).toFixed(2)}</strong></span>
         </ContainerDescription>
       </div>
 

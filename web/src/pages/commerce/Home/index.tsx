@@ -5,8 +5,10 @@ import {
   CarouselContent,
   CarouselWrapper,
   Container,
+  ContainerAdvertising,
   ContainerBanner,
   ContainerCarousel,
+  ContainerCategory,
   ContainerLastChange,
   ContainerMain,
   ContainersectionProducts,
@@ -163,6 +165,7 @@ export function Home() {
         <ContainerLastChange>
           <p>ÚLTIMA CHANCE</p>
         </ContainerLastChange>
+
         <ContainersectionProducts>
           <ContainerCarousel>
             <ArrowButton onClick={handlePrev}>
@@ -201,6 +204,217 @@ export function Home() {
             <FaAngleRight size={14} />
           </ContainerViewAll>
         </ContainersectionProducts>
+
+        <ContainerAdvertising>
+          <img src="propaganda-apagar.png" alt="Propaganda" />
+          <img src="propaganda-apagar.png" alt="Propaganda" />
+        </ContainerAdvertising>
+        <ContainerCategory>
+          <div>
+            <h3>Ofertas</h3>
+          </div>
+          <div>
+            <p>VER TODOS</p>
+            <FaAngleRight size={14} />
+          </div>
+        </ContainerCategory>
+
+        <ContainersectionProducts>
+
+          <ContainerCarousel>
+            <ArrowButton onClick={handlePrev}>
+              <FaAngleLeft />
+            </ArrowButton>
+            <CarouselWrapper>
+
+              <CarouselContent
+                itemsCount={productsLastChanges.length}
+                style={{
+                  transform: `translateX(-${currentIndex * 25}%)`,
+                }}
+              >
+                {productsLastChanges.map((product) => (
+                  <CardProduct
+                    id={product.id}
+                    img={product.img}
+                    title={product.title}
+                    price={product.price}
+                    offerPrice={product.offerPrice}
+                    discountPix={product.discountPix}
+                    offerTime={product.offerTime}
+                    stars={product.stars}
+                    starsQuantity={product.starsQuantity}
+                  />
+                ))}
+              </CarouselContent>
+            </CarouselWrapper>
+            <ArrowButton onClick={handleNext}>
+              <FaAngleRight />
+            </ArrowButton>
+          </ContainerCarousel>
+
+          <ContainerViewAll>
+            <p>VER TODOS</p>
+            <FaAngleRight size={14} />
+          </ContainerViewAll>
+        </ContainersectionProducts>
+
+        <ContainerAdvertising>
+          <img src="propaganda-apagar.png" alt="Propaganda" />
+          <img src="propaganda-apagar.png" alt="Propaganda" />
+        </ContainerAdvertising>
+        <ContainerCategory>
+          <div>
+            <h3>Ofertas</h3>
+          </div>
+          <div>
+            <p>VER TODOS</p>
+            <FaAngleRight size={14} />
+          </div>
+        </ContainerCategory>
+        <ContainersectionProducts>
+          <ContainerCarousel>
+            <ArrowButton onClick={handlePrev}>
+              <FaAngleLeft />
+            </ArrowButton>
+            <CarouselWrapper>
+
+              <CarouselContent
+                itemsCount={productsLastChanges.length}
+                style={{
+                  transform: `translateX(-${currentIndex * 25}%)`,
+                }}
+              >
+                {productsLastChanges.map((product) => (
+                  <CardProduct
+                    id={product.id}
+                    img={product.img}
+                    title={product.title}
+                    price={product.price}
+                    offerPrice={product.offerPrice}
+                    discountPix={product.discountPix}
+                    offerTime={product.offerTime}
+                    stars={product.stars}
+                    starsQuantity={product.starsQuantity}
+                  />
+                ))}
+              </CarouselContent>
+            </CarouselWrapper>
+            <ArrowButton onClick={handleNext}>
+              <FaAngleRight />
+            </ArrowButton>
+          </ContainerCarousel>
+
+          <ContainerViewAll>
+            <p>VER TODOS</p>
+            <FaAngleRight size={14} />
+          </ContainerViewAll>
+        </ContainersectionProducts>
+
+        <ContainerAdvertising>
+          <img src="propaganda-apagar.png" alt="Propaganda" />
+          <img src="propaganda-apagar.png" alt="Propaganda" />
+        </ContainerAdvertising>
+        <ContainerCategory>
+          <div>
+            <h3>Ofertas</h3>
+          </div>
+          <div>
+            <p>VER TODOS</p>
+            <FaAngleRight size={14} />
+          </div>
+        </ContainerCategory>
+        <ContainersectionProducts>
+          <ContainerCarousel>
+            <ArrowButton onClick={handlePrev}>
+              <FaAngleLeft />
+            </ArrowButton>
+            <CarouselWrapper>
+
+              <CarouselContent
+                itemsCount={productsLastChanges.length}
+                style={{
+                  transform: `translateX(-${currentIndex * 25}%)`,
+                }}
+              >
+                {productsLastChanges.map((product) => (
+                  <CardProduct
+                    id={product.id}
+                    img={product.img}
+                    title={product.title}
+                    price={product.price}
+                    offerPrice={product.offerPrice}
+                    discountPix={product.discountPix}
+                    offerTime={product.offerTime}
+                    stars={product.stars}
+                    starsQuantity={product.starsQuantity}
+                  />
+                ))}
+              </CarouselContent>
+            </CarouselWrapper>
+            <ArrowButton onClick={handleNext}>
+              <FaAngleRight />
+            </ArrowButton>
+          </ContainerCarousel>
+
+          <ContainerViewAll>
+            <p>VER TODOS</p>
+            <FaAngleRight size={14} />
+          </ContainerViewAll>
+        </ContainersectionProducts>
+
+        <ContainerAdvertising>
+          <img src="propaganda-apagar.png" alt="Propaganda" />
+          <img src="propaganda-apagar.png" alt="Propaganda" />
+        </ContainerAdvertising>
+        <ContainerCategory>
+          <div>
+            <h3>Ofertas</h3>
+          </div>
+          <div>
+            <p>VER TODOS</p>
+            <FaAngleRight size={14} />
+          </div>
+        </ContainerCategory>
+        <ContainersectionProducts>
+          <ContainerCarousel>
+            <ArrowButton onClick={handlePrev}>
+              <FaAngleLeft />
+            </ArrowButton>
+            <CarouselWrapper>
+
+              <CarouselContent
+                itemsCount={productsLastChanges.length}
+                style={{
+                  transform: `translateX(-${currentIndex * 25}%)`,
+                }}
+              >
+                {productsLastChanges.map((product) => (
+                  <CardProduct
+                    id={product.id}
+                    img={product.img}
+                    title={product.title}
+                    price={product.price}
+                    offerPrice={product.offerPrice}
+                    discountPix={product.discountPix}
+                    offerTime={product.offerTime}
+                    stars={product.stars}
+                    starsQuantity={product.starsQuantity}
+                  />
+                ))}
+              </CarouselContent>
+            </CarouselWrapper>
+            <ArrowButton onClick={handleNext}>
+              <FaAngleRight />
+            </ArrowButton>
+          </ContainerCarousel>
+
+          <ContainerViewAll>
+            <p>VER TODOS</p>
+            <FaAngleRight size={14} />
+          </ContainerViewAll>
+        </ContainersectionProducts>
+
       </ContainerMain>
     </Container>
   )
